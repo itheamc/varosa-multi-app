@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "15645869489",
+    "project_id": "varosa-multi-app",
+    "storage_bucket": "varosa-multi-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:15645869489:android:94f5c6f6a6eda1e0c16990",
+        "android_client_info": {
+          "package_name": "com.itheamc.varosa_multi_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArFQE5TppyZrwz4nY1AI5cSaiA8J7zP80"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:15645869489:android:01e489251ae7cdc7c16990",
+        "android_client_info": {
+          "package_name": "com.itheamc.varosa_multi_app.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArFQE5TppyZrwz4nY1AI5cSaiA8J7zP80"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:15645869489:android:366690fc761822e0c16990",
+        "android_client_info": {
+          "package_name": "com.itheamc.varosa_multi_app.staging"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArFQE5TppyZrwz4nY1AI5cSaiA8J7zP80"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
