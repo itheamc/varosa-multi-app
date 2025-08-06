@@ -446,13 +446,6 @@ extension LocalaeExt on Locale {
     final languageCodes = {
       L10n.ne.languageCode: context.appLocalization.nepali,
       L10n.en.languageCode: context.appLocalization.english,
-      L10n.bn.languageCode: context.appLocalization.bengali,
-      // L10n.hi.languageCode: context.appLocalization.hindi,
-      // L10n.es.languageCode: context.appLocalization.spanish,
-      // L10n.ar.languageCode: context.appLocalization.arabic,
-      // L10n.fr.languageCode: context.appLocalization.french,
-      // L10n.de.languageCode: context.appLocalization.german,
-      // L10n.ru.languageCode: context.appLocalization.russian,
     };
 
     return languageCodes[languageCode] ?? context.appLocalization.english;
@@ -462,13 +455,6 @@ extension LocalaeExt on Locale {
     final languageCodes = {
       L10n.ne.languageCode: "Nepali",
       L10n.en.languageCode: "English",
-      L10n.bn.languageCode: "Bengali",
-      // L10n.hi.languageCode: "Hindi",
-      // L10n.es.languageCode: "Spanish",
-      // L10n.ar.languageCode: "Arabic",
-      // L10n.fr.languageCode: "French",
-      // L10n.de.languageCode: "German",
-      // L10n.ru.languageCode: "Russian",
     };
 
     return languageCodes[languageCode] ?? "English";
@@ -478,13 +464,6 @@ extension LocalaeExt on Locale {
     final languageCodes = {
       L10n.ne.languageCode: "नेपाली",
       L10n.en.languageCode: "English",
-      L10n.bn.languageCode: "বাঙালি",
-      // L10n.hi.languageCode: "हिन्दी",
-      // L10n.es.languageCode: "Español",
-      // L10n.ar.languageCode: "العربية",
-      // L10n.fr.languageCode: "Français",
-      // L10n.de.languageCode: "Deutsch",
-      // L10n.ru.languageCode: "Русский",
     };
 
     return languageCodes[languageCode] ?? "English";
@@ -494,13 +473,6 @@ extension LocalaeExt on Locale {
     final languageCodes = {
       L10n.ne.languageCode: "🇳🇵",
       L10n.en.languageCode: "🇺🇸",
-      L10n.bn.languageCode: "🇧🇩",
-      // L10n.hi.languageCode: "🇮🇳",
-      // L10n.es.languageCode: "🇪🇸",
-      // L10n.ar.languageCode: "🇸🇦",
-      // L10n.fr.languageCode: "🇫🇷",
-      // L10n.de.languageCode: "🇩🇪",
-      // L10n.ru.languageCode: "🇷🇺",
     };
 
     return languageCodes[languageCode] ?? "🇺🇸";
