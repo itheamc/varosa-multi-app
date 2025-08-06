@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../modules/common/features/home/views/pages/home_screen.dart';
+import '../../../modules/method_channel/features/device_info/views/pages/device_info_screen.dart';
 import '../../../modules/todo_app/features/todos/views/pages/todos_screen.dart';
 import '../../../ui/features/settings/views/languages_settings_screen.dart';
 import '../../../ui/features/splash/views/pages/splash_screen.dart';
@@ -23,6 +24,7 @@ class AppRouter {
   // 3. Mini E-Commerce Product List
 
   // 4. MethodChannel
+  static const String deviceInfo = "/device-info";
 
   // 5. For Nested Bottom Navigation with Persistent UI
   static const item1 = "/item1";
@@ -75,6 +77,15 @@ class AppRouter {
           state: state,
           transitionType: TransitionType.slide,
           child: const TodosScreen(),
+        ),
+      ),
+      GoRoute(
+        path: deviceInfo,
+        name: toName(deviceInfo),
+        pageBuilder: (_, state) => _pageBuilder(
+          state: state,
+          transitionType: TransitionType.slide,
+          child: const DeviceInfoScreen(),
         ),
       ),
       // StatefulShellRoute.indexedStack(

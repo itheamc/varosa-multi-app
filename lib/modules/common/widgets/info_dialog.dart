@@ -74,7 +74,7 @@ class InfoDialog extends StatelessWidget {
               padding: EdgeInsets.zero,
               margin: EdgeInsets.symmetric(horizontal: 36.0),
               text: buttonText ?? 'Close',
-              buttonType: NaxaAppButtonType.outlined,
+              buttonType: VarosaAppButtonType.outlined,
               uppercase: false,
             ),
           ],

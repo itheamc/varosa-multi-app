@@ -13,7 +13,7 @@ class VarosaAppButton extends StatelessWidget {
   final double? height;
   final Color? color;
   final Color? onButtonColor;
-  final NaxaAppButtonType buttonType;
+  final VarosaAppButtonType buttonType;
   final bool loading;
   final bool uppercase;
   final bool showAlsoLoadingIndicator;
@@ -33,7 +33,7 @@ class VarosaAppButton extends StatelessWidget {
     this.borderRadius,
     this.color,
     this.onButtonColor,
-    this.buttonType = NaxaAppButtonType.elevated,
+    this.buttonType = VarosaAppButtonType.elevated,
     this.loading = false,
     this.uppercase = false,
     this.showAlsoLoadingIndicator = false,
@@ -68,9 +68,9 @@ class VarosaAppButton extends StatelessWidget {
                 ),
             decoration: BoxDecoration(
               borderRadius: borderRadius ?? radius,
-              color: buttonType == NaxaAppButtonType.elevated ? color : null,
-              border: buttonType == NaxaAppButtonType.outlined ||
-                      buttonType == NaxaAppButtonType.elevated
+              color: buttonType == VarosaAppButtonType.elevated ? color : null,
+              border: buttonType == VarosaAppButtonType.outlined ||
+                      buttonType == VarosaAppButtonType.elevated
                   ? Border.all(
                       color: color,
                       width: 1.0,
@@ -85,8 +85,8 @@ class VarosaAppButton extends StatelessWidget {
                     padding: const EdgeInsets.only(right: 8.0),
                     child: Icon(
                       leading,
-                      color: buttonType == NaxaAppButtonType.outlined ||
-                              buttonType == NaxaAppButtonType.text
+                      color: buttonType == VarosaAppButtonType.outlined ||
+                              buttonType == VarosaAppButtonType.text
                           ? color
                           : onButtonColor,
                       size: leadingSize,
@@ -103,8 +103,8 @@ class VarosaAppButton extends StatelessWidget {
                               uppercase ? text.uppercase : text,
                               style: context.textTheme.labelMedium?.copyWith(
                                 color:
-                                    buttonType == NaxaAppButtonType.outlined ||
-                                            buttonType == NaxaAppButtonType.text
+                                    buttonType == VarosaAppButtonType.outlined ||
+                                            buttonType == VarosaAppButtonType.text
                                         ? color
                                         : onButtonColor,
                               ),
@@ -115,8 +115,8 @@ class VarosaAppButton extends StatelessWidget {
                         : Text(
                             uppercase ? text.uppercase : text,
                             style: context.textTheme.labelMedium?.copyWith(
-                              color: buttonType == NaxaAppButtonType.outlined ||
-                                      buttonType == NaxaAppButtonType.text
+                              color: buttonType == VarosaAppButtonType.outlined ||
+                                      buttonType == VarosaAppButtonType.text
                                   ? color
                                   : onButtonColor,
                             ),
@@ -130,8 +130,8 @@ class VarosaAppButton extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 8.0),
                     child: Icon(
                       trailing,
-                      color: buttonType == NaxaAppButtonType.outlined ||
-                              buttonType == NaxaAppButtonType.text
+                      color: buttonType == VarosaAppButtonType.outlined ||
+                              buttonType == VarosaAppButtonType.text
                           ? color
                           : onButtonColor,
                       size: trailingSize,
@@ -146,7 +146,7 @@ class VarosaAppButton extends StatelessWidget {
                       child: CircularProgressIndicator.adaptive(
                         valueColor: AlwaysStoppedAnimation<Color>(color),
                         backgroundColor:
-                            buttonType == NaxaAppButtonType.elevated
+                            buttonType == VarosaAppButtonType.elevated
                                 ? onButtonColor
                                 : null,
                         strokeWidth: 2.0,
@@ -163,7 +163,7 @@ class VarosaAppButton extends StatelessWidget {
 }
 
 /// Enum
-enum NaxaAppButtonType {
+enum VarosaAppButtonType {
   elevated,
   text,
   outlined,

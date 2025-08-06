@@ -6,8 +6,8 @@ import '../../enums/nav_item.dart';
 
 /// NaxaBottomNavigation
 ///
-class NaxaBottomNavigation extends StatelessWidget {
-  const NaxaBottomNavigation({
+class VarosaBottomNavigation extends StatelessWidget {
+  const VarosaBottomNavigation({
     super.key,
     required this.items,
     required this.currentNavItem,

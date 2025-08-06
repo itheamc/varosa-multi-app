@@ -51,7 +51,7 @@ android {
         applicationId = "com.itheamc.varosa_multi_app"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = 23
+        minSdk = 24
         targetSdk = 36
         versionCode = flutter.versionCode
         versionName = flutter.versionName
@@ -68,6 +68,7 @@ android {
 }
 
 dependencies {
+    implementation("com.google.firebase:protolite-well-known-types:18.0.1")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
 }
 

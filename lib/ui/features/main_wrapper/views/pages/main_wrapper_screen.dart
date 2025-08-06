@@ -97,7 +97,7 @@ class _MainWrapperScreenState extends State<MainWrapperScreen> {
         bottomNavigationBar: AnimatedSize(
           duration: const Duration(milliseconds: 175),
           child: _showNavBar
-              ? NaxaBottomNavigation(
+              ? VarosaBottomNavigation(
                   items: NavItem.values,
                   currentNavItem: NavItem.values[widget.shell.currentIndex],
                   onSelect: (i, item) {
