@@ -5,6 +5,7 @@ import '../../../ui/features/home/views/pages/home_screen.dart';
 import '../../../ui/features/settings/views/languages_settings_screen.dart';
 import '../../../ui/features/splash/views/pages/splash_screen.dart';
 import '../../../ui/features/onboarding/views/pages/onboarding_screen.dart';
+import '../../../ui/features/todos/views/pages/todos_screen.dart';
 
 class AppRouter {
   static const languages = "/languages";
@@ -67,6 +68,51 @@ class AppRouter {
           child: const LanguagesSettingsScreen(),
         ),
       ),
+      GoRoute(
+        path: todos,
+        name: toName(todos),
+        pageBuilder: (_, state) => _pageBuilder(
+          state: state,
+          transitionType: TransitionType.slide,
+          child: const TodosScreen(),
+        ),
+      ),
+      // StatefulShellRoute.indexedStack(
+      //   builder: (_, state, shell) =>
+      //       MainWrapperScreen(shell: shell, state: state),
+      //   branches: [
+      //     StatefulShellBranch(
+      //       routes: [
+      //         GoRoute(
+      //           path: home,
+      //           name: toName(home),
+      //           pageBuilder: (_, state) =>
+      //               _pageBuilder(state: state, child: const HomeScreen()),
+      //         ),
+      //       ],
+      //     ),
+      //     StatefulShellBranch(
+      //       routes: [
+      //         GoRoute(
+      //           path: map,
+      //           name: toName(map),
+      //           pageBuilder: (_, state) =>
+      //               _pageBuilder(state: state, child: const HomeScreen()),
+      //         ),
+      //       ],
+      //     ),
+      //     StatefulShellBranch(
+      //       routes: [
+      //         GoRoute(
+      //           path: profile,
+      //           name: toName(profile),
+      //           pageBuilder: (_, state) =>
+      //               _pageBuilder(state: state, child: const HomeScreen()),
+      //         ),
+      //       ],
+      //     ),
+      //   ],
+      // ),
     ],
   );
 
