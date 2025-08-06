@@ -3,11 +3,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:varosa_multi_app/ui/features/onboarding/blocs/onboarding_status_cubit.dart';
 
+import '../../../../../modules/common/features/home/views/pages/home_screen.dart';
 import '../../../../../utils/extension_functions.dart';
-import '../../../../../core/services/router/app_router.dart';
+import '../../../onboarding/blocs/onboarding_status_cubit.dart';
+import '../../../onboarding/views/pages/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -38,11 +38,14 @@ class _SplashScreenState extends State<SplashScreen> {
       if (!mounted) return;
       final isAlreadyOnboarded = context.read<OnboardingStatusCubit>().state;
 
-      context.goNamed(
-        isAlreadyOnboarded
-            ? AppRouter.home.toPathName
-            : AppRouter.onboarding.toPathName,
-      );
+      // If already onboarded navigate to home screen
+      if (isAlreadyOnboarded) {
+        HomeScreen.navigate(context, go: true);
+        return;
+      }
+
+      // Else navigate to onboarding screen
+      OnboardingScreen.navigate(context, go: true);
     });
   }
 

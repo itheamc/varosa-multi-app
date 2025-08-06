@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../ui/features/home/views/pages/home_screen.dart';
+import '../../../modules/common/features/home/views/pages/home_screen.dart';
+import '../../../modules/todo_app/features/todos/views/pages/todos_screen.dart';
 import '../../../ui/features/settings/views/languages_settings_screen.dart';
 import '../../../ui/features/splash/views/pages/splash_screen.dart';
 import '../../../ui/features/onboarding/views/pages/onboarding_screen.dart';
-import '../../../ui/features/todos/views/pages/todos_screen.dart';
 
 class AppRouter {
   static const languages = "/languages";

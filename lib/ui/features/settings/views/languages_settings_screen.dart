@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../core/services/router/app_router.dart';
 import '../../../../l10n/l10n.dart';
-import '../../../common/gap.dart';
 import '../../../../utils/extension_functions.dart';
 
 class LanguagesSettingsScreen extends StatelessWidget {
   const LanguagesSettingsScreen({super.key});
+
+  /// Method to navigate to this screen
+  ///
+  static Future<T?> navigate<T>(BuildContext context, {bool go = false}) async {
+    if (go) {
+      context.goNamed(AppRouter.languages.toPathName);
+      return null;
+    }
+
+    return context.pushNamed(AppRouter.languages.toPathName);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +67,7 @@ class LanguagesSettingsScreen extends StatelessWidget {
                             height: 0.75,
                           ),
                         ),
-                        const Gap(12.0),
+                        const SizedBox(width: 12.0),
                         Text(
                           l.unlocalizedLabel,
                           style: context.textTheme.labelLarge,
@@ -74,7 +86,7 @@ class LanguagesSettingsScreen extends StatelessWidget {
               );
             },
             separatorBuilder: (BuildContext context, int index) {
-              return const Gap(12.0);
+              return const SizedBox(height: 12.0);
             },
           );
         },

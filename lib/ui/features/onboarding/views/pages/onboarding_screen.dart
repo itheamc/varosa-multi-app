@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:varosa_multi_app/core/services/storage/storage_service.dart';
-import 'package:varosa_multi_app/ui/features/home/views/pages/home_screen.dart';
 import 'package:varosa_multi_app/ui/features/onboarding/blocs/active_onboarding_item_cubit.dart';
 
+import '../../../../../modules/common/features/home/views/pages/home_screen.dart';
 import '../../../../../utils/extension_functions.dart';
 import '../../enums/onboarding_item.dart';
 import '../widgets/carousal_indicator.dart';
@@ -14,6 +14,17 @@ import '../../../../../core/services/storage/storage_keys.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
+
+  /// Method to navigate to this screen
+  ///
+  static Future<T?> navigate<T>(BuildContext context, {bool go = false}) async {
+    if (go) {
+      context.goNamed(AppRouter.onboarding.toPathName);
+      return null;
+    }
+
+    return context.pushNamed(AppRouter.onboarding.toPathName);
+  }
 
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();

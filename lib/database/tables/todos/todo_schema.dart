@@ -1,4 +1,4 @@
-import '../../../ui/features/todos/models/todo.dart';
+import '../../../modules/todo_app/features/todos/models/todo.dart';
 import '../../core/base_schema.dart';
 import 'todos_table.dart';
 

@@ -6,8 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:varosa_multi_app/core/services/connectivity/connectivity_status_cubit.dart';
 import 'package:varosa_multi_app/ui/features/onboarding/blocs/active_onboarding_item_cubit.dart';
 import 'package:varosa_multi_app/ui/features/onboarding/blocs/onboarding_status_cubit.dart';
-import 'package:varosa_multi_app/ui/features/todos/repositories/todos_repository.dart';
-import 'package:varosa_multi_app/ui/features/todos/repositories/todos_repository_impl.dart';
 
 import 'core/config/env/env.dart';
 import 'core/config/flavor/configuration_provider.dart';
@@ -20,6 +18,8 @@ import 'core/services/storage/hive_storage_service.dart';
 import 'core/services/storage/storage_service.dart';
 import 'firebase_options.dart';
 import 'l10n/l10n.dart';
+import 'modules/todo_app/features/todos/repositories/todos_repository.dart';
+import 'modules/todo_app/features/todos/repositories/todos_repository_impl.dart';
 import 'utils/logger.dart';
 import 'varosa_app.dart';
 
