@@ -167,28 +167,6 @@ class FieldValidator {
     return validateMobile(value, context: context);
   }
 
-  /// Method to validate age
-  ///
-  static String? validateAge(String? value, {required BuildContext context}) {
-    if (value == null || value.trim().isEmpty) {
-      return context.appLocalization.validate_age_required;
-    }
-
-    int age;
-    try {
-      age = int.parse(value);
-    } catch (e) {
-      return context.appLocalization.validate_age_invalid_number;
-    }
-
-    if (age < 10 || age > 120) {
-      return context.appLocalization.validate_age_invalid_range;
-    }
-
-    // Return null if the age is valid
-    return null;
-  }
-
   /// Method to check if password valid
   ///
   static bool isPasswordValid(String? password) {
