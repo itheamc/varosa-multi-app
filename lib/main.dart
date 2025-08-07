@@ -18,6 +18,9 @@ import 'core/services/storage/hive_storage_service.dart';
 import 'core/services/storage/storage_service.dart';
 import 'firebase_options.dart';
 import 'l10n/l10n.dart';
+import 'modules/mini_ecommerce/features/products/bloc/products_list_bloc.dart';
+import 'modules/mini_ecommerce/features/products/repositories/products_repository.dart';
+import 'modules/mini_ecommerce/features/products/repositories/products_repository_impl.dart';
 import 'modules/todo_app/features/todos/repositories/todos_repository.dart';
 import 'modules/todo_app/features/todos/repositories/todos_repository_impl.dart';
 import 'utils/logger.dart';
@@ -69,6 +72,11 @@ Future<void> main() async {
               context.read<StorageService>(),
             ),
           ),
+          RepositoryProvider<ProductsRepository>(
+            create: (context) {
+              return ProductsRepositoryImpl(context.read<HttpService>());
+            },
+          ),
           RepositoryProvider<TodosRepository>(
             create: (_) {
               return TodosRepositoryImpl();
@@ -87,6 +95,10 @@ Future<void> main() async {
                   OnboardingStatusCubit(context.read<StorageService>()),
             ),
             BlocProvider(create: (_) => ActiveOnboardingItemCubit()),
+            BlocProvider(
+              create: (context) =>
+                  ProductsListBloc(context.read<ProductsRepository>()),
+            ),
           ],
           child: VarosaApp(),
         ),

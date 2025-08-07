@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../modules/common/features/home/views/pages/home_screen.dart';
 import '../../../modules/method_channel/features/device_info/views/pages/device_info_screen.dart';
+import '../../../modules/mini_ecommerce/features/products/views/pages/products_screen.dart';
 import '../../../modules/nested_nav/features/item1/view/pages/item1_details_screen.dart';
 import '../../../modules/nested_nav/features/item1/view/pages/item1_screen.dart';
 import '../../../modules/nested_nav/features/item2/view/pages/item2_details_screen.dart';
@@ -29,6 +30,7 @@ class AppRouter {
   // 2. Dynamic Form Generator from JSON
 
   // 3. Mini E-Commerce Product List
+  static const String products = "/products";
 
   // 4. MethodChannel
   static const String deviceInfo = "/device-info";
@@ -96,6 +98,15 @@ class AppRouter {
           state: state,
           transitionType: TransitionType.slide,
           child: const DeviceInfoScreen(),
+        ),
+      ),
+      GoRoute(
+        path: products,
+        name: toName(products),
+        pageBuilder: (_, state) => _pageBuilder(
+          state: state,
+          transitionType: TransitionType.slide,
+          child: const ProductsScreen(),
         ),
       ),
       StatefulShellRoute.indexedStack(

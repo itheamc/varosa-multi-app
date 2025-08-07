@@ -24,5 +24,5 @@ class DevelopmentConfiguration extends Configuration {
   Flavor get flavor => Flavor.dev;
 
   @override
-  String get apiBaseUrl => apiBaseUrlV1;
+  String get apiBaseUrl => baseUrl;
 }

@@ -46,6 +46,14 @@ class ConnectivityStatusCubit extends Cubit<bool> {
     }
   }
 
+  Future<bool> refresh() async {
+    final connected = await _service.hasActiveConnection();
+    final hasInternet = connected ? await _hasActiveInternet() : false;
+    final updated = connected && hasInternet;
+    emit(updated);
+    return updated;
+  }
+
   @override
   Future<void> close() {
     _subscription.cancel();

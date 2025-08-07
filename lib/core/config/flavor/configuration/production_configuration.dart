@@ -24,5 +24,5 @@ class ProductionConfiguration extends Configuration {
   Flavor get flavor => Flavor.production;
 
   @override
-  String get apiBaseUrl => apiBaseUrlV1;
+  String get apiBaseUrl => baseUrl;
 }

@@ -24,5 +24,5 @@ class StagingConfiguration extends Configuration {
   Flavor get flavor => Flavor.staging;
 
   @override
-  String get apiBaseUrl => apiBaseUrlV1;
+  String get apiBaseUrl => baseUrl;
 }

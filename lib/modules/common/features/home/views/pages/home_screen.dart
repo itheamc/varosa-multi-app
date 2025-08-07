@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:varosa_multi_app/modules/common/features/home/views/widgets/home_item_view.dart';
-import 'package:varosa_multi_app/modules/nested_nav/features/item1/view/pages/item1_screen.dart';
 import 'package:varosa_multi_app/utils/extension_functions.dart';
 
 import '../../../../../../core/services/router/app_router.dart';
 import '../../../../../method_channel/features/device_info/views/pages/device_info_screen.dart';
+import '../../../../../mini_ecommerce/features/products/views/pages/products_screen.dart';
+import '../../../../../nested_nav/features/item1/view/pages/item1_screen.dart';
+import '../widgets/home_item_view.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -41,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
               HomeItemView(
                 title: "Method Channel (Device Info)",
                 onTap: () => DeviceInfoScreen.navigate(context, go: false),
-                icon: Icons.info,
+                icon: Icons.info_outline,
                 color: Colors.orange,
               ),
               HomeItemView(
@@ -49,6 +50,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 onTap: () => Item1Screen.navigate(context, go: false),
                 icon: Icons.navigation_outlined,
                 color: Colors.blueAccent,
+              ),
+              HomeItemView(
+                title: "Mini Ecommerce",
+                onTap: () => ProductsScreen.navigate(context, go: false),
+                icon: Icons.shopping_cart_outlined,
+                color: Colors.yellow,
               ),
             ],
           ),
