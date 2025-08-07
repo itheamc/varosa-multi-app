@@ -7,7 +7,7 @@ class FormStep {
   final String? description;
   final List<InputField> inputs;
 
-  FormStep copyWith({
+  FormStep copy({
     String? title,
     String? description,
     List<InputField>? inputs,

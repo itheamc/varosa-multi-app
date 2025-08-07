@@ -6,7 +6,7 @@ class DynamicForm {
   final String? title;
   final List<FormStep> steps;
 
-  DynamicForm copyWith({String? title, List<FormStep>? steps}) {
+  DynamicForm copy({String? title, List<FormStep>? steps}) {
     return DynamicForm(title: title ?? this.title, steps: steps ?? this.steps);
   }
 

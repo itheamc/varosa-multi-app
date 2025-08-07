@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../models/input_field.dart';
+import 'dynamic_form_field_error_view.dart';
 
 class DynamicFormToggleInputField extends StatelessWidget {
   final InputField field;
   final bool? value;
+  final String? errorMessage;
   final Function(bool) onChanged;
   final bool readOnly;
 
@@ -11,6 +13,7 @@ class DynamicFormToggleInputField extends StatelessWidget {
     super.key,
     required this.field,
     this.value,
+    this.errorMessage,
     required this.onChanged,
     this.readOnly = false,
   });
@@ -18,7 +21,7 @@ class DynamicFormToggleInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool currentValue = value ?? (field.inputDefault == true);
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -42,6 +45,10 @@ class DynamicFormToggleInputField extends StatelessWidget {
             ),
           ],
         ),
+        if (errorMessage != null) ...[
+          const SizedBox(height: 4),
+          DynamicFormFieldErrorView(errorMessage: errorMessage!),
+        ],
         const SizedBox(height: 16),
       ],
     );

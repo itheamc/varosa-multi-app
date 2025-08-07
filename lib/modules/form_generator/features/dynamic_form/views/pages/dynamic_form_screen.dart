@@ -3,49 +3,73 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:varosa_multi_app/utils/extension_functions.dart';
 import '../../../../../../core/services/router/app_router.dart';
-import '../../bloc/form_bloc.dart';
-import '../../bloc/form_event.dart';
-import '../../bloc/form_state.dart';
+import '../../bloc/dynamic_form_bloc.dart';
+import '../../bloc/dynamic_form_event.dart';
+import '../../bloc/dynamic_form_state.dart';
+import '../../data/dummy_form.dart';
 import '../../models/dynamic_form.dart';
 import '../widgets/dynamic_form_step.dart';
 
-class DynamicFormScreen extends StatelessWidget {
-  final DynamicForm form;
-  final Function(Map<String, dynamic>)? onSubmit;
+class DynamicFormScreen extends StatefulWidget {
+  final int? formId;
   final bool readOnly;
 
   const DynamicFormScreen({
     super.key,
-    required this.form,
-    this.onSubmit,
+    required this.formId,
     this.readOnly = false,
   });
 
   /// Method to navigate to this screen
-  static Future<T?> navigate<T>(BuildContext context, {bool go = false}) async {
+  static Future<T?> navigate<T>(
+    BuildContext context, {
+    required int formId,
+    bool readOnly = false,
+    bool go = false,
+  }) async {
+    final params = <String, String>{
+      'formId': formId.toString(),
+      'readOnly': readOnly.toString(),
+    };
+
     if (go) {
-      context.goNamed(AppRouter.dynamicForm.toPathName);
+      context.goNamed(
+        AppRouter.dynamicForm.toPathName,
+        queryParameters: params,
+      );
       return null;
     }
 
-    return context.pushNamed(AppRouter.dynamicForm.toPathName);
+    return context.pushNamed(
+      AppRouter.dynamicForm.toPathName,
+      queryParameters: params,
+    );
   }
 
   @override
+  State<DynamicFormScreen> createState() => _DynamicFormScreenState();
+}
+
+class _DynamicFormScreenState extends State<DynamicFormScreen> {
+  @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          DynamicFormBloc(onSubmit: onSubmit)
-            ..add(DynamicFormInitialized(form: form, readOnly: readOnly)),
-      child: _DynamicFormContent(readOnly: readOnly),
+      create: (context) => DynamicFormBloc(),
+      child: _DynamicFormContent(
+        formId: widget.formId,
+        readOnly: widget.readOnly,
+      ),
     );
   }
 }
 
+/// Content of the dynamic form screen
+///
 class _DynamicFormContent extends StatefulWidget {
-  final bool readOnly;
+  const _DynamicFormContent({super.key, this.formId, this.readOnly = false});
 
-  const _DynamicFormContent({super.key, required this.readOnly});
+  final int? formId;
+  final bool readOnly;
 
   @override
   State<_DynamicFormContent> createState() => _DynamicFormContentState();
@@ -59,19 +83,28 @@ class _DynamicFormContentState extends State<_DynamicFormContent> {
   void initState() {
     super.initState();
     _pageController = PageController();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _loadForm();
+    });
   }
 
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
+  /// Method to get the dynamic form from the server or local storage with the formId
+  /// But for now, we are using a static form
+  ///
+  Future<void> _loadForm() async {
+    if (widget.formId == null) return;
+
+    final form = DynamicForm.fromJson(dummyFormJson);
+    context.read<DynamicFormBloc>().add(
+      DynamicFormInitialized(form: form, readOnly: widget.readOnly),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<DynamicFormBloc, DynamicFormState>(
       listener: (context, state) {
-        // Animate to the current step when it changes
         if (_pageController.hasClients &&
             _pageController.page?.round() != state.currentStep) {
           _pageController.animateToPage(
@@ -82,27 +115,50 @@ class _DynamicFormContentState extends State<_DynamicFormContent> {
         }
       },
       builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(state.form.title ?? 'Dynamic Form'),
-            centerTitle: true,
-          ),
-          body: Form(
-            key: _formKey,
-            child: PageView.builder(
-              controller: _pageController,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: state.form.steps.length,
-              itemBuilder: (context, index) {
-                return DynamicFormStep(
-                  step: state.form.steps[index],
-                  readOnly: state.readOnly,
+        return PopScope(
+          canPop: !state.canGoBack,
+          onPopInvokedWithResult: (popped, result) {
+            if (!popped) {
+              if (state.canGoBack) {
+                context.read<DynamicFormBloc>().add(
+                  const DynamicFormPreviousStepRequested(),
                 );
-              },
+              }
+            }
+          },
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text(state.form.title ?? 'Dynamic Form'),
+              centerTitle: true,
             ),
+            body:
+                (state.form.title == null ||
+                        state.form.title?.isEmpty == true) &&
+                    state.form.steps.isEmpty
+                ? const Center(child: Text('No form data available.'))
+                : Form(
+                    key: _formKey,
+                    child: PageView.builder(
+                      controller: _pageController,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: state.form.steps.length,
+                      itemBuilder: (context, index) {
+                        return DynamicFormStep(
+                          step: state.form.steps[index],
+                          readOnly: state.readOnly,
+                        );
+                      },
+                    ),
+                  ),
           ),
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 }

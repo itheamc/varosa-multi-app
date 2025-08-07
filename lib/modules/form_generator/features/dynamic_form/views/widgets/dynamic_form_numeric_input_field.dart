@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../models/input_field.dart';
+import 'dynamic_form_field_error_view.dart';
 
 class DynamicFormNumericInputField extends StatelessWidget {
   final InputField field;
   final String? value;
+  final String? errorMessage;
   final Function(String) onChanged;
   final bool readOnly;
 
@@ -12,6 +14,7 @@ class DynamicFormNumericInputField extends StatelessWidget {
     super.key,
     required this.field,
     this.value,
+    this.errorMessage,
     required this.onChanged,
     this.readOnly = false,
   });
@@ -24,10 +27,7 @@ class DynamicFormNumericInputField extends StatelessWidget {
         if (field.label != null) ...[
           Text(
             '${field.label}${field.required == true ? ' *' : ''}',
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(height: 8),
         ],
@@ -36,19 +36,20 @@ class DynamicFormNumericInputField extends StatelessWidget {
           onChanged: onChanged,
           readOnly: readOnly,
           keyboardType: TextInputType.number,
-          inputFormatters: [
-            FilteringTextInputFormatter.digitsOnly,
-          ],
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           decoration: InputDecoration(
             hintText: 'Enter ${field.label ?? 'number'}',
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 16,
               vertical: 12,
             ),
+            error: errorMessage != null
+                ? DynamicFormFieldErrorView(errorMessage: errorMessage!)
+                : null,
           ),
+          errorBuilder: (_, error) =>
+              DynamicFormFieldErrorView(errorMessage: error),
           validator: (value) {
             if (field.required == true && (value == null || value.isEmpty)) {
               return 'This field is required';

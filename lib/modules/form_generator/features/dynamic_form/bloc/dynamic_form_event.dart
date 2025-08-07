@@ -41,7 +41,3 @@ class DynamicFormNextStepRequested extends DynamicFormEvent {
 class DynamicFormPreviousStepRequested extends DynamicFormEvent {
   const DynamicFormPreviousStepRequested();
 }
-
-class DynamicFormSubmitted extends DynamicFormEvent {
-  const DynamicFormSubmitted();
-}

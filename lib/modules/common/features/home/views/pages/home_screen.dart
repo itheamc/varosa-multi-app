@@ -60,7 +60,12 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               HomeItemView(
                 title: "Dynamic Forms",
-                onTap: () => DynamicFormScreen.navigate(context, go: false),
+                onTap: () => DynamicFormScreen.navigate(
+                  context,
+                  formId: 1,
+                  readOnly: false,
+                  go: false,
+                ),
                 icon: Icons.dynamic_form_outlined,
                 color: Colors.purple,
               ),
