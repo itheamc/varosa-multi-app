@@ -1,3 +1,5 @@
+import 'package:varosa_multi_app/database/tables/products/product_schema.dart';
+
 class Product {
   Product({
     this.id,
@@ -22,6 +24,7 @@ class Product {
     this.meta,
     this.images = const [],
     this.thumbnail,
+    this.isFavorite = false,
   });
 
   final int? id;
@@ -47,6 +50,24 @@ class Product {
   final List<String> images;
   final String? thumbnail;
 
+  // Just for handling the favorite
+  final bool isFavorite;
+
+  // Convert to schema
+  ProductSchema get toSchema => ProductSchema(
+    id: id,
+    title: title,
+    description: description,
+    category: category,
+    price: price,
+    discountPercentage: discountPercentage,
+    rating: rating,
+    thumbnail: thumbnail,
+    isFavorite: isFavorite,
+    createdAt: DateTime.now().toIso8601String(),
+    updatedAt: DateTime.now().toIso8601String(),
+  );
+
   Product copy({
     int? id,
     String? title,
@@ -70,6 +91,7 @@ class Product {
     Meta? meta,
     List<String>? images,
     String? thumbnail,
+    bool? isFavorite,
   }) {
     return Product(
       id: id ?? this.id,
@@ -94,6 +116,7 @@ class Product {
       meta: meta ?? this.meta,
       images: images ?? this.images,
       thumbnail: thumbnail ?? this.thumbnail,
+      isFavorite: isFavorite ?? this.isFavorite,
     );
   }
 

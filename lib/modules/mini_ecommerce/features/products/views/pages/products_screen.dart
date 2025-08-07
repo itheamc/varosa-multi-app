@@ -10,6 +10,7 @@ import '../../../../../../utils/debouncer.dart';
 import '../../../../../common/widgets/fixed_persistent_header_delegate.dart';
 import '../../../../../common/widgets/search_box.dart';
 import '../../bloc/products_list_bloc.dart';
+import '../../bloc/products_list_event.dart';
 import '../../bloc/products_list_state.dart';
 import '../widgets/product_card_shimmer_view.dart';
 import '../widgets/product_card_view.dart';
@@ -234,6 +235,11 @@ class _ProductsScreenState extends State<ProductsScreen> {
             product: product,
             onClick: () {
               // Handle click functionality here
+            },
+            onFavoriteToggle: (product) {
+              context.read<ProductsListBloc>().add(
+                FavoriteProductEvent(product: product),
+              );
             },
           ),
         );

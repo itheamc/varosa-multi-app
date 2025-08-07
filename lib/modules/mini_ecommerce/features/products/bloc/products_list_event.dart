@@ -47,6 +47,15 @@ class FetchProductsEvent extends ProductsListEvent {
   ];
 }
 
+class FavoriteProductEvent extends ProductsListEvent {
+  final Product product;
+
+  const FavoriteProductEvent({required this.product});
+
+  @override
+  List<Object?> get props => [product];
+}
+
 /// Event to query product
 /// [query] - Query to be used for filtering
 /// [forceRefresh] - Force refresh of the products

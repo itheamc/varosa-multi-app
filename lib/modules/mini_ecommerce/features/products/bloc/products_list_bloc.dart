@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:varosa_multi_app/database/tables/products/products_table.dart';
+import 'package:varosa_multi_app/utils/logger.dart';
 
 import '../models/product.dart';
 import '../repositories/products_repository.dart';
@@ -10,6 +12,7 @@ import 'products_list_state.dart';
 class ProductsListBloc extends Bloc<ProductsListEvent, ProductsListState> {
   ProductsListBloc(this._repository) : super(const ProductsListState()) {
     on<FetchProductsEvent>(_onFetchProducts);
+    on<FavoriteProductEvent>(_onFavoriteProduct);
   }
 
   /// Products Repository
@@ -80,14 +83,33 @@ class ProductsListBloc extends Bloc<ProductsListEvent, ProductsListState> {
         _requestCompleter?.complete();
       },
       (r) async {
+        // Inserting into the database
+        if (r.products.isNotEmpty) {
+          await ProductsTable.instance.inserts(
+            r.products.map((e) => e.toSchema).toList(),
+          );
+        }
+
+        // Getting the favorite status of each product and update accordingly
+        final products = [...r.products];
+
+        final favoriteStatus = await ProductsTable.instance.getFavoriteStatus(
+          products.map((e) => e.id).nonNulls.toList(),
+        );
+
+        final updatedProducts = products
+            .map((e) => e.copy(isFavorite: favoriteStatus[e.id]))
+            .toList();
+
+        // If not closed, update the state
         if (!isClosed) {
           emit(
             state.copy(
               fetching: false,
               error: '',
               products: _skip == 0
-                  ? r.products
-                  : [...state.products, ...r.products],
+                  ? updatedProducts
+                  : [...state.products, ...updatedProducts],
               lastResponse: r,
               total: r.total,
             ),
@@ -95,14 +117,14 @@ class ProductsListBloc extends Bloc<ProductsListEvent, ProductsListState> {
         }
 
         // Trigger on completed callback
-        event.onCompleted?.call(_skip ~/ _limit + 1, r.products);
+        event.onCompleted?.call(_skip ~/ _limit + 1, updatedProducts);
 
         // Complete the completer
         _requestCompleter?.complete();
 
         // Check if has more
         _hasMore =
-            r.products.isNotEmpty &&
+            products.isNotEmpty &&
             r.total != null &&
             state.products.length < r.total!;
       },
@@ -110,6 +132,29 @@ class ProductsListBloc extends Bloc<ProductsListEvent, ProductsListState> {
 
     // Updating skip for next request
     _skip = _skip + (event.limit ?? _limit);
+  }
+
+  /// Method to favorite the product and update the list accordingly
+  ///
+  Future<void> _onFavoriteProduct(
+    FavoriteProductEvent event,
+    Emitter<ProductsListState> emit,
+  ) async {
+    try {
+      await ProductsTable.instance.toggleFavorite(event.product.toSchema);
+      final products = [...state.products];
+
+      final index = products.indexWhere((e) => e.id == event.product.id);
+      if (index == -1) return;
+
+      products[index] = event.product.copy(
+        isFavorite: !event.product.isFavorite,
+      );
+
+      emit(state.copy(products: products));
+    } catch (e) {
+      Logger.logError(e);
+    }
   }
 
   /// Method to refresh products (reset to skip 0)
