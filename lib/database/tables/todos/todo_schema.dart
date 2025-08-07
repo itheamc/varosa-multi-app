@@ -7,6 +7,7 @@ class TodoSchema extends BaseSchema<Todo> {
     super.id,
     this.title,
     this.description,
+    this.dueDate,
     this.isCompleted = false,
     this.createdAt,
     this.updatedAt,
@@ -14,6 +15,7 @@ class TodoSchema extends BaseSchema<Todo> {
 
   final String? title;
   final String? description;
+  final String? dueDate;
   final bool isCompleted;
   final String? createdAt;
   final String? updatedAt;
@@ -23,6 +25,7 @@ class TodoSchema extends BaseSchema<Todo> {
     int? id,
     String? title,
     String? description,
+    String? dueDate,
     bool? isCompleted,
     String? createdAt,
     String? updatedAt,
@@ -31,6 +34,7 @@ class TodoSchema extends BaseSchema<Todo> {
       id: id ?? this.id,
       title: title ?? this.title,
       description: description ?? this.description,
+      dueDate: dueDate ?? this.dueDate,
       isCompleted: isCompleted ?? this.isCompleted,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
@@ -43,6 +47,7 @@ class TodoSchema extends BaseSchema<Todo> {
       id: json[TodosTable.columnId],
       title: json[TodosTable.columnTitle],
       description: json[TodosTable.columnDescription],
+      dueDate: json[TodosTable.columnDueDate],
       isCompleted: json[TodosTable.columnIsCompleted] == 1,
       createdAt: json[TodosTable.columnCreatedAt],
       updatedAt: json[TodosTable.columnUpdatedAt],
@@ -55,6 +60,7 @@ class TodoSchema extends BaseSchema<Todo> {
       if (id != null) TodosTable.columnId: id,
       if (title != null) TodosTable.columnTitle: title,
       if (description != null) TodosTable.columnDescription: description,
+      if (dueDate != null) TodosTable.columnDueDate: dueDate,
       TodosTable.columnIsCompleted: isCompleted ? 1 : 0,
       if (createdAt != null) TodosTable.columnCreatedAt: createdAt,
       if (updatedAt != null) TodosTable.columnUpdatedAt: updatedAt,
@@ -63,10 +69,12 @@ class TodoSchema extends BaseSchema<Todo> {
 
   @override
   Todo get toModel => Todo(
-        title: title,
-        description: description,
-        isCompleted: isCompleted,
-        createdAt: createdAt != null ? DateTime.tryParse(createdAt!) : null,
-        updatedAt: updatedAt != null ? DateTime.tryParse(updatedAt!) : null,
-      );
+    id: id,
+    title: title,
+    description: description,
+    dueDate: dueDate != null ? DateTime.tryParse(dueDate!) : null,
+    isCompleted: isCompleted,
+    createdAt: createdAt != null ? DateTime.tryParse(createdAt!) : null,
+    updatedAt: updatedAt != null ? DateTime.tryParse(updatedAt!) : null,
+  );
 }

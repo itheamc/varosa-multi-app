@@ -14,7 +14,7 @@ class TodosTable extends BaseTable<TodoSchema> {
   String get tableName => "tbl_todos";
 
   @override
-  String get column4OrderBy => columnCreatedAt;
+  String get column4OrderBy => columnDueDate;
 
   @override
   List<String> get columns4Query => [columnTitle, columnDescription];
@@ -26,6 +26,7 @@ class TodosTable extends BaseTable<TodoSchema> {
   static const String columnId = "id";
   static const String columnTitle = "title";
   static const String columnDescription = "description";
+  static const String columnDueDate = "due_date";
   static const String columnIsCompleted = "is_completed";
   static const String columnCreatedAt = "created_at";
   static const String columnUpdatedAt = "updated_at";
@@ -55,6 +56,7 @@ class TodosTable extends BaseTable<TodoSchema> {
       "$columnId INTEGER PRIMARY KEY AUTOINCREMENT,"
       "$columnTitle TEXT,"
       "$columnDescription TEXT,"
+      "$columnDueDate TEXT,"
       "$columnIsCompleted INTEGER,"
       "$columnCreatedAt TEXT,"
       "$columnUpdatedAt TEXT"
