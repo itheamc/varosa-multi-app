@@ -56,8 +56,8 @@ class Todo {
       id: json["id"],
       title: json["title"],
       description: json["description"],
-      dueDate: json['due_date'],
-      isCompleted: json["is_completed"],
+      dueDate: json["due_date"] != null ? DateTime.tryParse(json["due_date"]) : null,
+      isCompleted: json["is_completed"] == 1 || json["is_completed"] == true,
       createdAt: DateTime.tryParse(json["created_at"] ?? ""),
       updatedAt: DateTime.tryParse(json["updated_at"] ?? ""),
     );

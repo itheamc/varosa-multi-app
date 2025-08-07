@@ -1,6 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 /// Creating a [AndroidNotificationChannel] for heads up notifications
 late AndroidNotificationChannel channel;
@@ -91,6 +92,57 @@ void showFirebaseNotification(RemoteMessage message) {
           interruptionLevel: InterruptionLevel.critical,
         ),
       ),
+      payload: message.data['payload'],
     );
   }
+}
+
+/// Method to show a scheduled notification
+/// This is used for local notifications like to-do reminders
+Future<void> showScheduledNotification({
+  required int id,
+  required String title,
+  required String body,
+  required tz.TZDateTime scheduledDate,
+  String? payload,
+  AndroidNotificationDetails? androidDetails,
+  DarwinNotificationDetails? iosDetails,
+}) async {
+  // Ensure notifications are initialized
+  if (!isFlutterLocalNotificationsInitialized) {
+    await setupFlutterLocalNotifications();
+  }
+  
+  // Use provided details or default ones
+  final android = androidDetails ?? AndroidNotificationDetails(
+    channel.id,
+    channel.name,
+    channelDescription: channel.description,
+    icon: 'notification_icon',
+    visibility: NotificationVisibility.public,
+    importance: Importance.max,
+    priority: Priority.max,
+  );
+  
+  final ios = iosDetails ?? const DarwinNotificationDetails(
+    presentSound: true,
+    presentAlert: true,
+    interruptionLevel: InterruptionLevel.critical,
+  );
+  
+  final notificationDetails = NotificationDetails(
+    android: android,
+    iOS: ios,
+  );
+  
+  // Schedule the notification
+  await flutterLocalNotificationsPlugin.zonedSchedule(
+    id,
+    title,
+    body,
+    scheduledDate,
+    notificationDetails,
+    androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+    payload: payload,
+  );
 }

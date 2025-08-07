@@ -174,7 +174,7 @@ abstract class BaseTable<T extends BaseSchema> {
         schema.toJson(),
         where: "id = ?",
         whereArgs: [
-          schema.id ?? id,
+          id,
         ],
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
@@ -241,7 +241,7 @@ abstract class BaseTable<T extends BaseSchema> {
 
       final query = await database?.query(
         tableName,
-        where: "$id = ?",
+        where: "id = ?",
         whereArgs: [id],
       );
 

@@ -66,7 +66,7 @@ class _DynamicFormScreenState extends State<DynamicFormScreen> {
 /// Content of the dynamic form screen
 ///
 class _DynamicFormContent extends StatefulWidget {
-  const _DynamicFormContent({super.key, this.formId, this.readOnly = false});
+  const _DynamicFormContent({this.formId, this.readOnly = false});
 
   final int? formId;
   final bool readOnly;

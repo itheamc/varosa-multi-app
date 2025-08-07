@@ -8,6 +8,7 @@ import '../../../../../form_generator/features/dynamic_form/views/pages/dynamic_
 import '../../../../../method_channel/features/device_info/views/pages/device_info_screen.dart';
 import '../../../../../mini_ecommerce/features/products/views/pages/products_screen.dart';
 import '../../../../../nested_nav/features/item1/view/pages/item1_screen.dart';
+import '../../../../../todo_app/features/todos/views/pages/todos_screen.dart';
 import '../widgets/home_item_view.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -35,11 +36,18 @@ class _HomeScreenState extends State<HomeScreen> {
       value: const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
       child: Scaffold(
         extendBodyBehindAppBar: true,
+        appBar: AppBar(title: const Text("App Modules"), centerTitle: true),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 16.0,
             children: [
+              HomeItemView(
+                title: "Todo",
+                onTap: () => TodosScreen.navigate(context, go: false),
+                icon: Icons.info_outline,
+                color: Colors.orange,
+              ),
               HomeItemView(
                 title: "Method Channel (Device Info)",
                 onTap: () => DeviceInfoScreen.navigate(context, go: false),
