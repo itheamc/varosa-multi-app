@@ -143,6 +143,18 @@ abstract class AppLocalizations {
   /// **'Name'**
   String get name;
 
+  /// No description provided for @sign_in.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In'**
+  String get sign_in;
+
+  /// No description provided for @sign_up.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get sign_up;
+
   /// No description provided for @first_name.
   ///
   /// In en, this message translates to:
@@ -634,6 +646,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This is the description of the on boarding title 4'**
   String get item4_description;
+
+  /// No description provided for @session_expired.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Session Has Expired'**
+  String get session_expired;
+
+  /// No description provided for @session_expired_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'For your security, please sign in again to continue.'**
+  String get session_expired_desc;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:varosa_multi_app/modules/common/features/auth/bloc/refresh_token_event.dart';
 import 'package:varosa_multi_app/utils/extension_functions.dart';
 
 import '../../../../../../core/services/connectivity/connectivity_status_cubit.dart';
 import '../../../../../../core/services/firebase/firebase_notification/fcm_notification_handler.dart';
+import '../../../../../../utils/logger.dart';
+import '../../../../../common/features/auth/bloc/refresh_token_bloc.dart';
+import '../../../../../common/widgets/custom_warning_dialog.dart';
 import '../../../item1/bloc/counter_cubit_1.dart';
 import '../../../item2/bloc/counter_cubit_2.dart';
 import '../../../item3/bloc/counter_cubit_3.dart';
@@ -35,6 +39,11 @@ class _NestedNavWrapperScreenState extends State<NestedNavWrapperScreen> {
 
     // Initialize firebase notification service
     _initializeFirebaseNotificationService();
+
+    // Initiate token refresh logic.
+    // Note: The refresh token provider is configured to allow a single refresh per 24-hour period.
+    // This ensures efficient authentication management without excessive network calls.
+    _handleTokenRefresh();
   }
 
   /// Method to set up firebase notification service
@@ -62,6 +71,44 @@ class _NestedNavWrapperScreenState extends State<NestedNavWrapperScreen> {
         },
       );
     });
+  }
+
+  /// Method for handling token refresh
+  ///
+  Future<void> _handleTokenRefresh() async {
+    // Check if internet is connected or not
+    final connected = context.read<ConnectivityStatusCubit>().state;
+
+    // If not connected return
+    if (!connected) return;
+
+    // Else try to refresh the token
+    context.read<RefreshTokenBloc>().add(
+      RefreshRequested(
+        onSuccess: (res) {
+          // If token refresh is successful
+          Logger.logMessage("Token Refreshed");
+        },
+        onLogoutRequired: () {
+          if (!mounted) return;
+
+          // If token is expired then show warning dialog
+          CustomWarningDialog.show(
+            context,
+            title: context.appLocalization.session_expired,
+            description: context.appLocalization.session_expired_desc,
+            buttonText: context.appLocalization.sign_in,
+            onCancel: () {
+              // If cancelled close the app
+              SystemNavigator.pop();
+            },
+            onPressed: () {
+              // Initiate logout request
+            },
+          );
+        },
+      ),
+    );
   }
 
   @override

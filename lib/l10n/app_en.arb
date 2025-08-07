@@ -7,6 +7,8 @@
   "tab_item2": "Item2",
   "tab_item3": "Item3",
   "name": "Name",
+  "sign_in": "Sign In",
+  "sign_up": "Sign Up",
   "first_name": "First Name",
   "middle_name": "Middle Name",
   "last_name": "Last Name",
@@ -88,5 +90,7 @@
   "item1_description": "This is the description of the on boarding title 1",
   "item2_description": "This is the description of the on boarding title 2",
   "item3_description": "This is the description of the on boarding title 3",
-  "item4_description": "This is the description of the on boarding title 4"
+  "item4_description": "This is the description of the on boarding title 4",
+  "session_expired": "Your Session Has Expired",
+  "session_expired_desc": "For your security, please sign in again to continue."
 }

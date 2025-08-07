@@ -33,6 +33,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get name => 'Name';
 
   @override
+  String get sign_in => 'Sign In';
+
+  @override
+  String get sign_up => 'Sign Up';
+
+  @override
   String get first_name => 'First Name';
 
   @override
@@ -277,4 +283,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get item4_description => 'This is the description of the on boarding title 4';
+
+  @override
+  String get session_expired => 'Your Session Has Expired';
+
+  @override
+  String get session_expired_desc => 'For your security, please sign in again to continue.';
 }
