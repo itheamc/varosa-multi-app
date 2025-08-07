@@ -15,7 +15,11 @@ bool isFlutterLocalNotificationsInitialized = false;
 /// Method to setup the flutter notification services
 /// It will initialize the [FlutterLocalNotificationsPlugin]
 /// and the [AndroidNotificationChannel]
-Future<void> setupFlutterLocalNotifications() async {
+Future<void> setupFlutterLocalNotifications({
+  void Function(NotificationResponse)? onDidReceiveNotificationResponse,
+  void Function(NotificationResponse)?
+  onDidReceiveBackgroundNotificationResponse,
+}) async {
   /// If already initialized then return from here
   if (isFlutterLocalNotificationsInitialized) {
     return;
@@ -37,7 +41,8 @@ Future<void> setupFlutterLocalNotifications() async {
   /// default FCM channel to enable heads up notifications.
   await flutterLocalNotificationsPlugin
       .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin>()
+        AndroidFlutterLocalNotificationsPlugin
+      >()
       ?.createNotificationChannel(channel);
 
   /// Updating the iOS foreground notification presentation options to allow
@@ -57,7 +62,7 @@ Future<void> setupFlutterLocalNotifications() async {
         requestAlertPermission: false,
         requestBadgePermission: false,
         requestSoundPermission: false,
-      )
+      ),
     ),
   );
 
@@ -112,29 +117,30 @@ Future<void> showScheduledNotification({
   if (!isFlutterLocalNotificationsInitialized) {
     await setupFlutterLocalNotifications();
   }
-  
+
   // Use provided details or default ones
-  final android = androidDetails ?? AndroidNotificationDetails(
-    channel.id,
-    channel.name,
-    channelDescription: channel.description,
-    icon: 'notification_icon',
-    visibility: NotificationVisibility.public,
-    importance: Importance.max,
-    priority: Priority.max,
-  );
-  
-  final ios = iosDetails ?? const DarwinNotificationDetails(
-    presentSound: true,
-    presentAlert: true,
-    interruptionLevel: InterruptionLevel.critical,
-  );
-  
-  final notificationDetails = NotificationDetails(
-    android: android,
-    iOS: ios,
-  );
-  
+  final android =
+      androidDetails ??
+      AndroidNotificationDetails(
+        channel.id,
+        channel.name,
+        channelDescription: channel.description,
+        icon: 'notification_icon',
+        visibility: NotificationVisibility.public,
+        importance: Importance.max,
+        priority: Priority.max,
+      );
+
+  final ios =
+      iosDetails ??
+      const DarwinNotificationDetails(
+        presentSound: true,
+        presentAlert: true,
+        interruptionLevel: InterruptionLevel.critical,
+      );
+
+  final notificationDetails = NotificationDetails(android: android, iOS: ios);
+
   // Schedule the notification
   await flutterLocalNotificationsPlugin.zonedSchedule(
     id,

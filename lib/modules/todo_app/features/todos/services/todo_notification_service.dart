@@ -29,7 +29,16 @@ class TodoNotificationService {
     tz.setLocalLocation(tz.getLocation('Asia/Kathmandu'));
 
     // Use the FCM notification service setup
-    await setupFlutterLocalNotifications();
+    await setupFlutterLocalNotifications(
+      onDidReceiveNotificationResponse: (response) {
+        // Handle notification response here
+        // You can navigate to a specific screen or perform any other action
+        // based on the notification's payload
+      },
+      onDidReceiveBackgroundNotificationResponse: (response) {
+        // Handle background notification response here
+      },
+    );
 
     _isInitialized = true;
   }
