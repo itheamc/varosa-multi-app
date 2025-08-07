@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/services/storage/storage_keys.dart';
-import '../../../../core/services/storage/storage_service.dart';
+import '../../../../../core/services/storage/storage_keys.dart';
+import '../../../../../core/services/storage/storage_service.dart';
 
 class OnboardingStatusCubit extends Cubit<bool> {
   OnboardingStatusCubit(this._storageService)

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../utils/extension_functions.dart';
+import 'package:varosa_multi_app/utils/extension_functions.dart';
 
 enum OnboardingItem {
   item1(

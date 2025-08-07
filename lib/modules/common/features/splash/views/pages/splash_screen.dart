@@ -3,9 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:varosa_multi_app/utils/extension_functions.dart';
 
-import '../../../../../modules/common/features/home/views/pages/home_screen.dart';
-import '../../../../../utils/extension_functions.dart';
+import '../../../home/views/pages/home_screen.dart';
 import '../../../onboarding/blocs/onboarding_status_cubit.dart';
 import '../../../onboarding/views/pages/onboarding_screen.dart';
 

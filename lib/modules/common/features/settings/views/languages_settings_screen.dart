@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:varosa_multi_app/utils/extension_functions.dart';
 
-import '../../../../core/services/router/app_router.dart';
-import '../../../../l10n/l10n.dart';
-import '../../../../utils/extension_functions.dart';
+import '../../../../../core/services/router/app_router.dart';
+import '../../../../../l10n/l10n.dart';
 
 class LanguagesSettingsScreen extends StatelessWidget {
   const LanguagesSettingsScreen({super.key});

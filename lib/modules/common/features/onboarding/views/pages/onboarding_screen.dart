@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:varosa_multi_app/core/services/storage/storage_service.dart';
-import 'package:varosa_multi_app/ui/features/onboarding/blocs/active_onboarding_item_cubit.dart';
+import 'package:varosa_multi_app/utils/extension_functions.dart';
 
-import '../../../../../modules/common/features/home/views/pages/home_screen.dart';
-import '../../../../../utils/extension_functions.dart';
+import '../../../../../../core/services/router/app_router.dart';
+import '../../../../../../core/services/storage/storage_keys.dart';
+import '../../../home/views/pages/home_screen.dart';
+import '../../blocs/active_onboarding_item_cubit.dart';
 import '../../enums/onboarding_item.dart';
 import '../widgets/carousal_indicator.dart';
 import '../widgets/carousal_control_button.dart';
-import '../../../../../core/services/router/app_router.dart';
-import '../../../../../core/services/storage/storage_keys.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});

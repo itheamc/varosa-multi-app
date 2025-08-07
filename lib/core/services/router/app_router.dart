@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../modules/common/features/home/views/pages/home_screen.dart';
+import '../../../modules/common/features/onboarding/views/pages/onboarding_screen.dart';
+import '../../../modules/common/features/settings/views/languages_settings_screen.dart';
+import '../../../modules/common/features/splash/views/pages/splash_screen.dart';
 import '../../../modules/method_channel/features/device_info/views/pages/device_info_screen.dart';
 import '../../../modules/mini_ecommerce/features/products/views/pages/products_screen.dart';
 import '../../../modules/nested_nav/features/item1/view/pages/item1_details_screen.dart';
@@ -12,9 +15,6 @@ import '../../../modules/nested_nav/features/item3/view/pages/item3_details_scre
 import '../../../modules/nested_nav/features/item3/view/pages/item3_screen.dart';
 import '../../../modules/nested_nav/features/nested_nav_wrapper/views/pages/nested_nav_wrapper_screen.dart';
 import '../../../modules/todo_app/features/todos/views/pages/todos_screen.dart';
-import '../../../ui/features/settings/views/languages_settings_screen.dart';
-import '../../../ui/features/splash/views/pages/splash_screen.dart';
-import '../../../ui/features/onboarding/views/pages/onboarding_screen.dart';
 
 class AppRouter {
   static const languages = "/languages";

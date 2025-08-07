@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:varosa_multi_app/ui/features/onboarding/blocs/active_onboarding_item_cubit.dart';
+import 'package:varosa_multi_app/utils/extension_functions.dart';
 
-import '../../../../../modules/common/widgets/varosa_app_button.dart';
+import '../../../../widgets/varosa_app_button.dart';
+import '../../blocs/active_onboarding_item_cubit.dart';
 import '../../enums/onboarding_item.dart';
-import '../../../../../utils/extension_functions.dart';
 
 class CarousalControlButton extends StatelessWidget {
   final void Function(OnboardingItem item)? onClick;

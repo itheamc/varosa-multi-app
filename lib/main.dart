@@ -4,8 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:varosa_multi_app/core/services/connectivity/connectivity_status_cubit.dart';
-import 'package:varosa_multi_app/ui/features/onboarding/blocs/active_onboarding_item_cubit.dart';
-import 'package:varosa_multi_app/ui/features/onboarding/blocs/onboarding_status_cubit.dart';
 
 import 'core/config/env/env.dart';
 import 'core/config/flavor/configuration_provider.dart';
@@ -18,6 +16,8 @@ import 'core/services/storage/hive_storage_service.dart';
 import 'core/services/storage/storage_service.dart';
 import 'firebase_options.dart';
 import 'l10n/l10n.dart';
+import 'modules/common/features/onboarding/blocs/active_onboarding_item_cubit.dart';
+import 'modules/common/features/onboarding/blocs/onboarding_status_cubit.dart';
 import 'modules/mini_ecommerce/features/products/bloc/products_list_bloc.dart';
 import 'modules/mini_ecommerce/features/products/repositories/products_repository.dart';
 import 'modules/mini_ecommerce/features/products/repositories/products_repository_impl.dart';
