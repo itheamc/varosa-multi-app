@@ -162,7 +162,7 @@ class _TodosScreenState extends State<TodosScreen>
           VarosaAppButton(
             width: 80.0,
             onPressed: () {
-              Navigator.of(context).pop();
+              context.pop();
               if (todo.id != null) {
                 _todosBloc.add(TodoDeleted(todo.id!));
               }

@@ -72,7 +72,7 @@ class InputField {
 
   Map<String, dynamic> toJson() => {
     "key": key,
-    "type": type,
+    "type": type?.name,
     "label": label,
     "required": required,
     "default": inputDefault,

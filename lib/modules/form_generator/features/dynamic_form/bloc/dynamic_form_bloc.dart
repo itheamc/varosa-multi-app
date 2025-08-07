@@ -5,6 +5,7 @@ import 'dynamic_form_state.dart';
 class DynamicFormBloc extends Bloc<DynamicFormEvent, DynamicFormState> {
   DynamicFormBloc() : super(DynamicFormState.reset()) {
     on<DynamicFormInitialized>(_onInitialized);
+    on<DynamicFormFieldsUpdated>(_onFieldsUpdated);
     on<DynamicFormFieldUpdated>(_onFieldUpdated);
     on<DynamicFormNextStepRequested>(_onNextStepRequested);
     on<DynamicFormPreviousStepRequested>(_onPreviousStepRequested);
@@ -34,6 +35,29 @@ class DynamicFormBloc extends Bloc<DynamicFormEvent, DynamicFormState> {
         currentStep: 0,
         answers: initialFormData,
         readOnly: event.readOnly,
+      ),
+    );
+  }
+
+  /// Method to handle [DynamicFormFieldsUpdated] event
+  /// This event is triggered when a forms values are updated at once
+  ///
+  void _onFieldsUpdated(
+    DynamicFormFieldsUpdated event,
+    Emitter<DynamicFormState> emit,
+  ) {
+    // Updating the fields values/answers in the state
+    final tempAnswers = Map<String, dynamic>.from(event.values);
+
+    // Clear all error message when overall values are updated
+    final tempErrors = Map<String, String>.from(state.errors);
+    tempErrors.clear();
+
+    emit(
+      state.copyWith(
+        answers: tempAnswers,
+        errors: tempErrors,
+        currentStep: event.lastStep,
       ),
     );
   }
