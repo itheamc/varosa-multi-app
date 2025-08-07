@@ -112,9 +112,7 @@ class _DynamicFormContentState extends State<_DynamicFormContent>
     // preserve in the database
     final schema = await FormsTable.instance.get(widget.formId!);
     if (schema != null && mounted) {
-      if (!schema.isCompleted &&
-          schema.answers != null &&
-          schema.answers!.trim().isNotEmpty) {
+      if (schema.answers != null && schema.answers!.trim().isNotEmpty) {
         // Show a dialog to ask user to continue from the previous state
         _showContinueFromPreviousStateConfirmationDialog(
           onRestore: () {
@@ -237,14 +235,14 @@ class _DynamicFormContentState extends State<_DynamicFormContent>
             borderRadius: BorderRadius.circular(42.0),
           ),
           VarosaAppButton(
-            width: 80.0,
+            width: 100.0,
             onPressed: () {
               context.pop();
               onRestore?.call();
             },
             text: 'Restore',
             buttonType: VarosaAppButtonType.text,
-            color: Colors.red,
+            color: Colors.green,
             borderRadius: BorderRadius.circular(42.0),
           ),
         ],

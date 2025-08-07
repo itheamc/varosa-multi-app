@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:go_router/go_router.dart';
+import '../../../../../common/widgets/varosa_app_button.dart';
 import '../../bloc/dynamic_form_bloc.dart';
 import '../../bloc/dynamic_form_event.dart';
 import '../../bloc/dynamic_form_state.dart';
@@ -60,8 +63,20 @@ class DynamicFormStep extends StatelessWidget {
                     const DynamicFormPreviousStepRequested(),
                   );
                 },
-                onSubmit: () {
+                onSubmit: () async {
+                  if (!state.isLastStep) {
+                    Fluttertoast.showToast(msg: 'Please complete the form');
+                    return;
+                  }
 
+                  if (state.errors.isNotEmpty) {
+                    Fluttertoast.showToast(
+                      msg: 'Please correct the errors first',
+                    );
+                    return;
+                  }
+
+                  _showInputValues(context, values: state.answers);
                 },
               ),
             ],
@@ -71,6 +86,8 @@ class DynamicFormStep extends StatelessWidget {
     );
   }
 
+  /// Method to build the input field based on the input type
+  ///
   Widget _buildInputField(
     BuildContext context,
     InputField field,
@@ -78,9 +95,7 @@ class DynamicFormStep extends StatelessWidget {
   ) {
     final value = state.answers[field.key]?.toString();
     final bloc = context.read<DynamicFormBloc>();
-    final errorMessage = field.key != null
-        ? state.errors[field.key!]
-        : null;
+    final errorMessage = field.key != null ? state.errors[field.key!] : null;
 
     switch (field.type) {
       case InputFieldType.text:
@@ -126,5 +141,48 @@ class DynamicFormStep extends StatelessWidget {
       default:
         return const SizedBox.shrink();
     }
+  }
+
+  /// Method to show the dialog to visualize the input values
+  ///
+  Future<T?> _showInputValues<T>(
+    BuildContext context, {
+    Map<String, dynamic> values = const {},
+  }) {
+    return showDialog<T>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Your Input Values'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: values.keys.map((key) {
+            final value = values[key];
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4.0),
+              child: Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text: '$key: ',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    TextSpan(text: value.toString()),
+                  ],
+                ),
+              ),
+            );
+          }).toList(),
+        ),
+        actions: [
+          VarosaAppButton(
+            onPressed: context.pop,
+            text: 'Close',
+            buttonType: VarosaAppButtonType.text,
+            borderRadius: BorderRadius.circular(42.0),
+          ),
+        ],
+      ),
+    );
   }
 }
