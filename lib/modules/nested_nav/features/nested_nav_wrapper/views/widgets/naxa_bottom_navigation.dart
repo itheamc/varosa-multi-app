@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/styles/varosa_app_colors.dart';
-import '../../../../../utils/extension_functions.dart';
+import 'package:varosa_multi_app/utils/extension_functions.dart';
 
+import '../../../../../../core/styles/varosa_app_colors.dart';
 import '../../enums/nav_item.dart';
 
 /// NaxaBottomNavigation
@@ -38,22 +38,17 @@ class VarosaBottomNavigation extends StatelessWidget {
       showSelectedLabels: true,
       showUnselectedLabels: false,
       type: BottomNavigationBarType.fixed,
-      items: items
-          .map(
-            (item) => _buildItem(item, context: context),
-          )
-          .toList(),
-      onTap: (index) => onSelect(
-        index,
-        NavItem.values[index],
-      ),
+      items: items.map((item) => _buildItem(item, context: context)).toList(),
+      onTap: (index) => onSelect(index, NavItem.values[index]),
       currentIndex: currentNavItem.index,
     );
   }
 
   /// Helper function to convert nav item to bottom navigation bar item
-  BottomNavigationBarItem _buildItem(NavItem item,
-      {required BuildContext context}) {
+  BottomNavigationBarItem _buildItem(
+    NavItem item, {
+    required BuildContext context,
+  }) {
     return item.toBottomNavigationBarItem(context);
   }
 }

@@ -24,10 +24,10 @@ class AppLocalizationsNe extends AppLocalizations {
   String get tab_item1 => 'वस्तु १';
 
   @override
-  String get tab_item2 => 'वस्तु १';
+  String get tab_item2 => 'वस्तु 2';
 
   @override
-  String get tab_item3 => 'वस्तु १';
+  String get tab_item3 => 'वस्तु 3';
 
   @override
   String get name => 'नाम';

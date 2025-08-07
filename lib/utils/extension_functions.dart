@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:varosa_multi_app/modules/common/widgets/common_icon.dart';
 
 import '../core/config/flavor/configuration.dart';
 import '../core/config/flavor/configuration_provider.dart';
 import '../../l10n/l10n.dart';
 
 import '../l10n/app_localizations.dart';
-import '../ui/features/main_wrapper/enums/nav_item.dart';
+import '../modules/nested_nav/features/nested_nav_wrapper/enums/nav_item.dart';
 
 /// BuildContext Extension functions
 extension BuildContextExt on BuildContext {
@@ -431,7 +432,7 @@ extension IntExt on int? {
 extension NavItemExt on NavItem {
   BottomNavigationBarItem toBottomNavigationBarItem(BuildContext context) {
     return BottomNavigationBarItem(
-      icon: Icon(icon),
+      icon: CommonIcon(icon: icon),
       activeIcon: Icon(activeIcon),
       label: localizedLabel(context),
       tooltip: label,

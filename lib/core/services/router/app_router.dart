@@ -3,6 +3,13 @@ import 'package:go_router/go_router.dart';
 
 import '../../../modules/common/features/home/views/pages/home_screen.dart';
 import '../../../modules/method_channel/features/device_info/views/pages/device_info_screen.dart';
+import '../../../modules/nested_nav/features/item1/view/pages/item1_details_screen.dart';
+import '../../../modules/nested_nav/features/item1/view/pages/item1_screen.dart';
+import '../../../modules/nested_nav/features/item2/view/pages/item2_details_screen.dart';
+import '../../../modules/nested_nav/features/item2/view/pages/item2_screen.dart';
+import '../../../modules/nested_nav/features/item3/view/pages/item3_details_screen.dart';
+import '../../../modules/nested_nav/features/item3/view/pages/item3_screen.dart';
+import '../../../modules/nested_nav/features/nested_nav_wrapper/views/pages/nested_nav_wrapper_screen.dart';
 import '../../../modules/todo_app/features/todos/views/pages/todos_screen.dart';
 import '../../../ui/features/settings/views/languages_settings_screen.dart';
 import '../../../ui/features/splash/views/pages/splash_screen.dart';
@@ -30,6 +37,9 @@ class AppRouter {
   static const item1 = "/item1";
   static const item2 = "/item2";
   static const item3 = "/item3";
+  static const item1Details = "/item1-details";
+  static const item2Details = "/item2-details";
+  static const item3Details = "/item3-details";
 
   static String toName(String path) => path.replaceFirst("/", "");
 
@@ -88,42 +98,75 @@ class AppRouter {
           child: const DeviceInfoScreen(),
         ),
       ),
-      // StatefulShellRoute.indexedStack(
-      //   builder: (_, state, shell) =>
-      //       MainWrapperScreen(shell: shell, state: state),
-      //   branches: [
-      //     StatefulShellBranch(
-      //       routes: [
-      //         GoRoute(
-      //           path: home,
-      //           name: toName(home),
-      //           pageBuilder: (_, state) =>
-      //               _pageBuilder(state: state, child: const HomeScreen()),
-      //         ),
-      //       ],
-      //     ),
-      //     StatefulShellBranch(
-      //       routes: [
-      //         GoRoute(
-      //           path: map,
-      //           name: toName(map),
-      //           pageBuilder: (_, state) =>
-      //               _pageBuilder(state: state, child: const HomeScreen()),
-      //         ),
-      //       ],
-      //     ),
-      //     StatefulShellBranch(
-      //       routes: [
-      //         GoRoute(
-      //           path: profile,
-      //           name: toName(profile),
-      //           pageBuilder: (_, state) =>
-      //               _pageBuilder(state: state, child: const HomeScreen()),
-      //         ),
-      //       ],
-      //     ),
-      //   ],
-      // ),
+      StatefulShellRoute.indexedStack(
+        builder: (_, state, shell) =>
+            NestedNavWrapperScreen(shell: shell, state: state),
+        branches: [
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: item1,
+                name: toName(item1),
+                pageBuilder: (_, state) =>
+                    _pageBuilder(state: state, child: const Item1Screen()),
+                routes: [
+                  GoRoute(
+                    path: item1Details,
+                    name: toName(item1Details),
+                    pageBuilder: (_, state) => _pageBuilder(
+                      state: state,
+                      transitionType: TransitionType.slide,
+                      child: const Item1DetailsScreen(),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: item2,
+                name: toName(item2),
+                pageBuilder: (_, state) =>
+                    _pageBuilder(state: state, child: const Item2Screen()),
+                routes: [
+                  GoRoute(
+                    path: item2Details,
+                    name: toName(item2Details),
+                    pageBuilder: (_, state) => _pageBuilder(
+                      state: state,
+                      transitionType: TransitionType.slide,
+                      child: const Item2DetailsScreen(),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: item3,
+                name: toName(item3),
+                pageBuilder: (_, state) =>
+                    _pageBuilder(state: state, child: const Item3Screen()),
+                routes: [
+                  GoRoute(
+                    path: item3Details,
+                    name: toName(item3Details),
+                    pageBuilder: (_, state) => _pageBuilder(
+                      state: state,
+                      transitionType: TransitionType.slide,
+                      child: const Item3DetailsScreen(),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
     ],
   );
 

@@ -24,10 +24,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tab_item1 => 'Item1';
 
   @override
-  String get tab_item2 => 'Item1';
+  String get tab_item2 => 'Item2';
 
   @override
-  String get tab_item3 => 'Item1';
+  String get tab_item3 => 'Item3';
 
   @override
   String get name => 'Name';

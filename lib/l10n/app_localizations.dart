@@ -128,13 +128,13 @@ abstract class AppLocalizations {
   /// No description provided for @tab_item2.
   ///
   /// In en, this message translates to:
-  /// **'Item1'**
+  /// **'Item2'**
   String get tab_item2;
 
   /// No description provided for @tab_item3.
   ///
   /// In en, this message translates to:
-  /// **'Item1'**
+  /// **'Item3'**
   String get tab_item3;
 
   /// No description provided for @name.

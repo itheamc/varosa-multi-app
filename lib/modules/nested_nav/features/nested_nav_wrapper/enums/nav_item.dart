@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../core/services/router/app_router.dart';
-import '../../../../utils/extension_functions.dart';
+import 'package:varosa_multi_app/utils/extension_functions.dart';
+import '../../../../../core/services/router/app_router.dart';
 
 /// NavItem Enum for bottom navigation bar
 ///
@@ -14,14 +14,14 @@ enum NavItem {
   item2(
     path: AppRouter.item2,
     label: "Task2",
-    icon: Icons.map,
-    activeIcon: Icons.map,
+    icon: Icons.graphic_eq,
+    activeIcon: Icons.graphic_eq,
   ),
   item3(
     path: AppRouter.item3,
     label: "Task3",
-    icon: Icons.person,
-    activeIcon: Icons.person,
+    icon: Icons.list,
+    activeIcon: Icons.list,
   );
 
   const NavItem({

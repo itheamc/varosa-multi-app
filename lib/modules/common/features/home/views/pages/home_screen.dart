@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:varosa_multi_app/modules/common/features/home/views/widgets/home_item_view.dart';
+import 'package:varosa_multi_app/modules/nested_nav/features/item1/view/pages/item1_screen.dart';
 import 'package:varosa_multi_app/utils/extension_functions.dart';
 
 import '../../../../../../core/services/router/app_router.dart';
@@ -35,12 +36,19 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 16.0,
             children: [
               HomeItemView(
                 title: "Method Channel (Device Info)",
                 onTap: () => DeviceInfoScreen.navigate(context, go: false),
                 icon: Icons.info,
                 color: Colors.orange,
+              ),
+              HomeItemView(
+                title: "Nested Nav",
+                onTap: () => Item1Screen.navigate(context, go: false),
+                icon: Icons.navigation_outlined,
+                color: Colors.blueAccent,
               ),
             ],
           ),
