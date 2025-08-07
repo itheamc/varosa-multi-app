@@ -164,7 +164,7 @@ class _ImageViewerState extends State<ImageViewer>
                   widget.imagePathOrUrl,
                   height: context.mediaQuery.size.height,
                   width: context.mediaQuery.size.width,
-                  errorBuilder: (_, __, e) => SizedBox(
+                  errorBuilder: (_, _, e) => SizedBox(
                     height: context.mediaQuery.size.height,
                     width: context.mediaQuery.size.width,
                     child: widget.errorWidget ??
